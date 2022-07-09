@@ -6,7 +6,7 @@ install:
 
 lint:
 	poetry run black . --check
-	poetry run isort . --check-only
+	poetry run isort --check-only
 	poetry run mypy .
 
 format:
