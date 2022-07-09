@@ -29,15 +29,18 @@ jobs:
       - name: Test
         run: make test
 
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      # This step checks out a copy of your repository.
-      - uses: actions/checkout@v2
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          version: 0.0.333
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  # TODO: Figure out why this is failing with the following error:
+  #   Waiting for remote builder fly-builder-fragrant-smoke-9554...
+  #   Error failed to fetch an image or build from source: error connecting to docker: remote builder app unavailable
+  #   WARN Remote builder did not start in time. Check remote builder logs with `flyctl logs -a fly-builder-fragrant-smoke-9554`
+
+  # deploy:
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # This step checks out a copy of your repository.
+  #     - uses: actions/checkout@v2
+  #     - uses: superfly/flyctl-actions/setup-flyctl@master
+  #     - run: flyctl deploy --remote-only
+  #       env:
+  #         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
